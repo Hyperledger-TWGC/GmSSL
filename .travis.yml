@@ -9,6 +9,9 @@ install:
   - make
   - sudo make install
   - cd $TRAVIS_BUILD_DIR
-  - cd gmssl; CGO_ENABLED=1 go build; cd -
+  - go env
+  - cd gmssl; CGO_ENABLED=1 go build; 
+  - go env
+  - cd -
 script:
   - cd test; go test;
