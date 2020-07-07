@@ -8,8 +8,7 @@ install:
   - ./config
   - make
   - sudo make install
-  - ln -s /usr/local/lib/libssl.so.1.1 /usr/lib/libssl.so.1.1
-  - ln -s /usr/local/lib/libcrypto.so.1.1 /usr/lib/libcrypto.so.1.1
+  - export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
   - cd $TRAVIS_BUILD_DIR
   - cd gmssl; go build; cd -
 script:
