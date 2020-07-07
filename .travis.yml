@@ -7,11 +7,10 @@ install:
   - cd $HOME; git clone https://github.com/guanzhi/GmSSL.git; cd GmSSL
   - ./config
   - make
-  - sudo make install
+  - sudo make install_sw
+  - export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+  - sudo ldconfig
   - cd $TRAVIS_BUILD_DIR
-  - go env
-  - cd gmssl; CGO_ENABLED=1 go build; 
-  - go env
-  - cd -
+  - cd gmssl; go build; cd -
 script:
   - cd test; go test;
