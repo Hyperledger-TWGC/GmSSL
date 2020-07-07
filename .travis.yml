@@ -9,6 +9,7 @@ install:
   - make
   - sudo make install
   - export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+  - sudo ldconfig
   - cd $TRAVIS_BUILD_DIR
   - cd gmssl; go build; cd -
 script:
