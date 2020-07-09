@@ -6,6 +6,7 @@ os:
 go:
   - "1.14"
   - "1.12"
+  
 install:
   - cd $HOME; git clone https://github.com/guanzhi/GmSSL.git; cd GmSSL
   - ./config
@@ -15,5 +16,8 @@ install:
   - cd gmssl; go build; cd -
 script:
   - export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+  - if [[ $TRAVIS_OS_NAME == "windows" ]]; then
+      sudo ldconfig
+    fi
   - curl --version # test curl affection
   - cd test; go test;
