@@ -15,7 +15,7 @@ install:
   - cd $TRAVIS_BUILD_DIR
   - cd gmssl; go build; cd -
 script:
-  - export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+  - export LD_LIBRARY_PATH=/usr/local/gmssl:$LD_LIBRARY_PATH
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo ldconfig ;fi
   - gmssl version
   - curl --version # test curl affection
