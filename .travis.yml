@@ -9,7 +9,7 @@ go:
   
 install:
   - cd $HOME; git clone https://github.com/guanzhi/GmSSL.git; cd GmSSL
-  - ./config
+  - ./config --prefix=/usr/local/gmssl
   - make
   - sudo make install_sw
   - cd $TRAVIS_BUILD_DIR
