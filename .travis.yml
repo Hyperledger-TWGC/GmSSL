@@ -16,7 +16,7 @@ install:
   - cd gmssl; go build; cd -
 script:
   - export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-  - if [[ $TRAVIS_OS_NAME == "windows" ]]; then
+  - if [[ $TRAVIS_OS_NAME == "linux" ]]; then
       sudo ldconfig
     fi
   - curl --version # test curl affection
