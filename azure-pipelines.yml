@@ -1,0 +1,30 @@
+trigger: 
+ - master
+
+pool:
+   vmImage: 'ubuntu-18.04'
+
+jobs:
+  - job: setupUbuntu
+    steps:
+      - script: sudo apt update
+      - script: sudo apt upgrade
+  - job: buildGmSSL
+    dependsOn: setupUbuntu
+    steps:
+      - checkout: none
+      - script: cd $(Pipeline.Workspace); git clone https://github.com/guanzhi/GmSSL.git
+      - script: cd $(Pipeline.Workspace)/GmSSL; ./config --prefix=/usr/local/gmssl;
+      - script: cd $(Pipeline.Workspace)/GmSSL; make
+      - script: cd $(Pipeline.Workspace)/GmSSL; sudo make install_sw
+  - job: buildSelf
+    dependsOn: buildGmSSL
+    steps:
+      - checkout: self
+      - task: GoTool@0
+        inputs:
+          version: '1.14'
+      - task: Go@0
+        inputs:
+          command: 'build'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/gmssl'
