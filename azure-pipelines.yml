@@ -7,7 +7,7 @@ pool:
 jobs:
   - job: GmSSL_go
     steps:
-      - script: cd $(Pipeline.Workspace); git clone https://github.com/guanzhi/GmSSL.git
+      - script: cat /etc/os-release && cd $(Pipeline.Workspace); git clone https://github.com/guanzhi/GmSSL.git
         displayName: Clone GMSSL
       - script: cd $(Pipeline.Workspace)/GmSSL; SYSTEM=`uname -s` ./config --prefix=/usr/local/gmssl;
       - script: cd $(Pipeline.Workspace)/GmSSL; make

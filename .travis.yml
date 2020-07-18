@@ -8,6 +8,7 @@ go:
   - "1.12"
   
 install:
+  - cat /etc/os-release
   - cd $HOME; git clone https://github.com/guanzhi/GmSSL.git; cd GmSSL
   - ./config --prefix=/usr/local/gmssl
   - make
