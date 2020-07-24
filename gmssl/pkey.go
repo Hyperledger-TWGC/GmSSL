@@ -642,7 +642,7 @@ func GeneratePrivateKey(alg string, args [][2]string, eng *Engine) (*PrivateKey,
 	defer C.EVP_PKEY_CTX_free(ctx)
 
 	if eng != nil {
-		ctx := C.new_pkey_keygen_ctx(calg, eng.engine)
+		ctx = C.new_pkey_keygen_ctx(calg, eng.engine)
 	}
 
 	if ctx == nil {
