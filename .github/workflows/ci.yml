@@ -3,6 +3,8 @@ on:
   push:
   schedule:
     - cron: "0 0 * * 0" # https://crontab.guru/#0_0_*_*_0
+env:
+  LD_LIBRARY_PATH: /usr/local/gmssl/lib
 jobs:
   buildNtest:
     runs-on: ubuntu-18.04
@@ -11,6 +13,7 @@ jobs:
         with:
           repository: guanzhi/GmSSL
           path: GMSSL
+          ref: master
       - run: SYSTEM=`uname -s` ./config --prefix=/usr/local/gmssl;
         working-directory: GMSSL
       - run: make
@@ -20,13 +23,11 @@ jobs:
       - uses: actions/checkout@main
       - uses: actions/setup-go@main
         with:
-          go-version: 1.16
+          go-version: 1.18
       - run: go build
         working-directory: gmssl
-      - run: curl --version
-        name: curl san check
-      - run: env LD_LIBRARY_PATH=/usr/local/gmssl/lib go test -v ./...
+      - run: go test -v ./...
         working-directory: test
-      - run: env LD_LIBRARY_PATH=/usr/local/gmssl/lib go test -bench=. -run=none -cover
+      - run: go test -bench=. -run=none -cover
         working-directory: test
         name: bench test
